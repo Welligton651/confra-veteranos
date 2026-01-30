@@ -19,7 +19,7 @@
 </head>
 <body class="bg-[#0f172a] text-slate-200 min-h-screen pb-32 overflow-x-hidden">
 
-    <!-- Background Decoration -->
+    <!-- Decoração de Fundo -->
     <div class="fixed top-0 left-0 w-full h-full pointer-events-none opacity-20 z-0">
         <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px]"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-yellow-600 rounded-full blur-[120px]"></div>
@@ -27,7 +27,7 @@
 
     <div class="relative z-10 max-w-5xl mx-auto px-4 pt-8">
         
-        <!-- Header Section -->
+        <!-- Cabeçalho -->
         <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 animate-slide-up">
             <div>
                 <div class="flex items-center gap-2 text-yellow-500 font-bold tracking-widest text-[10px] uppercase mb-2">
@@ -37,7 +37,7 @@
                 <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
                     Veteranos <span class="text-blue-500">VP3</span>
                 </h1>
-                <p class="text-slate-400 mt-2">Controle Central de Mensalidades (Fev a Dez)</p>
+                <p class="text-slate-400 mt-2">Gestão de Mensalidades (Fev a Dez)</p>
             </div>
 
             <div class="glass p-4 rounded-2xl flex items-center gap-4">
@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <!-- Stats Dashboard -->
+        <!-- Dashboard de Estatísticas -->
         <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 animate-slide-up" style="animation-delay: 0.1s">
             <div class="md:col-span-2 glass p-6 rounded-3xl relative overflow-hidden group">
                 <div class="relative z-10">
@@ -69,27 +69,27 @@
             </div>
 
             <div class="glass p-6 rounded-3xl flex flex-col justify-center">
-                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Membros Quitados</p>
+                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Quitados (Ano)</p>
                 <div class="text-3xl font-bold text-center text-green-500" id="stat-paid-members">0</div>
                 <p class="text-[10px] text-slate-500 text-center uppercase" id="stat-total-members">de 0 total</p>
             </div>
 
             <div class="glass p-6 rounded-3xl flex flex-col justify-center">
-                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Pendentes (Ano)</p>
+                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Pendentes</p>
                 <div class="text-3xl font-bold text-center text-red-400" id="stat-pending-members">0</div>
-                <p class="text-[10px] text-slate-500 text-center uppercase">Com parcelas em aberto</p>
+                <p class="text-[10px] text-slate-500 text-center uppercase">Aguardando Pgto</p>
             </div>
         </section>
 
-        <!-- Search & Add -->
+        <!-- Busca e Adição -->
         <div class="flex flex-col md:flex-row gap-3 mb-6 animate-slide-up" style="animation-delay: 0.2s">
-            <div class="flex-1 glass-light p-1.5 rounded-2xl flex gap-2">
+            <form onsubmit="event.preventDefault(); addMember();" class="flex-1 glass-light p-1.5 rounded-2xl flex gap-2">
                 <div class="flex-1 relative">
                     <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400" id="icon-search-input"></div>
                     <input type="text" id="input-new-member" placeholder="Nome do Novo Veterano..." class="w-full bg-transparent pl-10 pr-4 py-3 outline-none text-slate-900 font-semibold text-sm">
                 </div>
-                <button onclick="addMember()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg">ADICIONAR</button>
-            </div>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg">ADICIONAR</button>
+            </form>
             
             <div class="glass p-1.5 rounded-2xl flex gap-1">
                 <button onclick="changeView('grid')" id="view-grid" class="p-3 rounded-xl transition-all"></button>
@@ -97,23 +97,20 @@
             </div>
         </div>
 
-        <!-- Members Container -->
+        <!-- Lista de Membros -->
         <div id="members-list" class="min-h-[400px]">
-            <div class="flex flex-col items-center justify-center py-20 opacity-40">
-                <div id="loading-spinner" class="animate-spin rounded-full h-10 w-10 border-b-2 border-white mb-4"></div>
-                <p id="loading-text">Sincronizando veteranos...</p>
-            </div>
+            <!-- Preenchido via JS -->
         </div>
     </div>
 
-    <!-- Persistent Footer -->
+    <!-- Rodapé Persistente -->
     <nav class="fixed bottom-0 left-0 right-0 p-4 z-50">
         <div class="max-w-xl mx-auto glass-light rounded-[2rem] p-4 shadow-2xl flex items-center justify-between gap-4 border border-white/20">
             <div class="pl-4">
-                <p class="text-[10px] font-bold text-slate-500 uppercase">Status</p>
+                <p class="text-[10px] font-bold text-slate-500 uppercase">Armazenamento</p>
                 <div class="flex items-center gap-2">
-                    <div id="status-indicator" class="w-2 h-2 rounded-full bg-slate-400"></div>
-                    <span id="status-text" class="text-xs font-bold text-slate-900">Desconectado</span>
+                    <div id="status-indicator" class="w-2 h-2 rounded-full bg-blue-500"></div>
+                    <span id="status-text" class="text-xs font-bold text-slate-900">Local + Cache</span>
                 </div>
             </div>
             
@@ -123,7 +120,7 @@
                 </button>
                 <button onclick="shareReport()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 shadow-xl shadow-green-500/20 active:scale-95 transition-all">
                     <div id="icon-whatsapp"></div>
-                    <span>ENVIAR RELATÓRIO</span>
+                    <span>RELATÓRIO</span>
                 </button>
             </div>
         </div>
@@ -135,11 +132,11 @@
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, setDoc, onSnapshot, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // CONFIGURAÇÕES GLOBAIS COM FALLBACK PARA EVITAR ERROS
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vp3-veteranos-v2';
-        
-        // Período de Fevereiro a Dezembro
+        // CONFIGURAÇÕES E CONSTANTES
+        const STORAGE_KEY = 'vp3_members_data';
+        const APP_ID = typeof __app_id !== 'undefined' ? __app_id : 'vp3-veteranos-7anos';
+        const FIREBASE_CONFIG = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+
         const MONTHS = [
             { id: 'fev', label: 'Fev' }, { id: 'mar', label: 'Mar' }, { id: 'abr', label: 'Abr' },
             { id: 'mai', label: 'Mai' }, { id: 'jun', label: 'Jun' }, { id: 'jul', label: 'Jul' },
@@ -148,17 +145,23 @@
         ];
 
         let state = {
-            members: [],
-            fee: 20,
-            view: 'grid',
-            user: null
+            members: JSON.parse(localStorage.getItem(STORAGE_KEY)) || [],
+            fee: Number(localStorage.getItem('vp3_fee_pref')) || 20,
+            view: localStorage.getItem('vp3_view_pref') || 'grid',
+            user: null,
+            db: null
         };
 
-        let db, auth;
+        // FUNÇÕES DE PERSISTÊNCIA LOCAL
+        const saveLocal = () => {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state.members));
+            localStorage.setItem('vp3_fee_pref', state.fee);
+            localStorage.setItem('vp3_view_pref', state.view);
+            render();
+        };
 
-        // VINCULAR FUNÇÕES AO WINDOW IMEDIATAMENTE (Evita "addMember is not defined")
+        // FUNÇÕES TIPO 'WINDOW' PARA ACESSO PELOS BOTÕES
         window.addMember = async () => {
-            if (!state.user || !db) return;
             const input = document.getElementById('input-new-member');
             const name = input.value.trim();
             if (!name) return;
@@ -168,45 +171,63 @@
             MONTHS.forEach(m => initialPayments[m.id] = false);
 
             const newMember = {
+                id: id,
                 name: name,
                 payments: initialPayments,
                 createdAt: new Date().toISOString()
             };
 
-            try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', id), newMember);
-                input.value = '';
-            } catch (e) { console.error("Erro ao salvar:", e); }
+            // Atualiza local primeiro para feedback instantâneo
+            state.members.push(newMember);
+            saveLocal();
+            input.value = '';
+
+            // Tenta salvar na nuvem se disponível
+            if (state.db && state.user) {
+                try {
+                    await setDoc(doc(state.db, 'artifacts', APP_ID, 'public', 'data', 'members', id), newMember);
+                } catch (e) { console.warn("Erro ao sincronizar novo membro:", e); }
+            }
         };
 
         window.togglePayment = async (memberId, monthId) => {
-            if (!state.user || !db) return;
-            const member = state.members.find(m => m.id === memberId);
-            if (!member) return;
+            const index = state.members.findIndex(m => m.id === memberId);
+            if (index === -1) return;
 
-            const current = !!member.payments[monthId];
-            const updates = { [`payments.${monthId}`]: !current };
-            
-            try {
-                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', memberId), updates);
-            } catch (e) { console.error("Erro ao atualizar:", e); }
+            // Inverte localmente
+            state.members[index].payments[monthId] = !state.members[index].payments[monthId];
+            saveLocal();
+
+            // Tenta atualizar nuvem
+            if (state.db && state.user) {
+                try {
+                    const current = !!state.members[index].payments[monthId];
+                    await updateDoc(doc(state.db, 'artifacts', APP_ID, 'public', 'data', 'members', memberId), {
+                        [`payments.${monthId}`]: current
+                    });
+                } catch (e) { console.warn("Erro ao sincronizar pagamento:", e); }
+            }
         };
 
         window.deleteMember = async (id) => {
-            if (!state.user || !db) return;
-            if (confirm("Deseja realmente remover este veterano?")) {
+            if (!confirm("Deseja remover este veterano?")) return;
+
+            state.members = state.members.filter(m => m.id !== id);
+            saveLocal();
+
+            if (state.db && state.user) {
                 try {
-                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', id));
-                } catch (e) { console.error("Erro ao deletar:", e); }
+                    await deleteDoc(doc(state.db, 'artifacts', APP_ID, 'public', 'data', 'members', id));
+                } catch (e) { console.warn("Erro ao remover da nuvem:", e); }
             }
         };
 
         window.changeView = (mode) => {
             state.view = mode;
-            localStorage.setItem('vp3_view_pref', mode);
-            render();
+            saveLocal();
         };
 
+        // RELATÓRIOS E EXPORTAÇÃO
         window.exportAZ = () => {
             if (state.members.length === 0) return;
             const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
@@ -218,73 +239,61 @@
         window.shareReport = () => {
             if (state.members.length === 0) return;
             const total = state.members.reduce((acc, m) => acc + (MONTHS.filter(mo => m.payments[mo.id]).length * state.fee), 0);
-            let text = `🏆 *RELATÓRIO DE MENSALIDADES - VP3* 🏆\n\n`;
+            let text = `🏆 *RELATÓRIO MENSALIDADES VP3* 🏆\n\n`;
             const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
             sorted.forEach(m => {
                 const missing = MONTHS.filter(mo => !m.payments[mo.id]);
-                const status = missing.length === 0 ? "✅ QUITADO" : `⏳ Faltam: ${missing.map(mo => mo.label).join(', ')}`;
+                const status = missing.length === 0 ? "✅ QUITADO" : `⏳ Falta: ${missing.map(mo => mo.label).join(', ')}`;
                 text += `👤 *${m.name}*\n${status}\n\n`;
             });
-            text += `💰 *TOTAL ARRECADADO: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}*`;
+            text += `💰 *TOTAL EM CAIXA: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}*`;
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
         };
 
         // INICIALIZAÇÃO
         const init = async () => {
             setupIcons();
-            
-            if (!firebaseConfig) {
-                document.getElementById('loading-text').innerText = "Erro: Configuração de nuvem não encontrada.";
-                document.getElementById('loading-spinner').classList.add('hidden');
-                return;
-            }
-
-            try {
-                const appInstance = initializeApp(firebaseConfig);
-                auth = getAuth(appInstance);
-                db = getFirestore(appInstance);
-
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                onAuthStateChanged(auth, (user) => {
-                    state.user = user;
-                    if (user) {
-                        document.getElementById('status-indicator').classList.replace('bg-slate-400', 'bg-green-500');
-                        document.getElementById('status-text').innerText = "Sincronizado";
-                        startSync();
-                    }
-                });
-            } catch (error) {
-                console.error("Erro Firebase:", error);
-                document.getElementById('loading-text').innerText = "Erro ao conectar com o servidor.";
-            }
-
-            state.fee = Number(localStorage.getItem('vp3_fee_pref')) || 20;
-            state.view = localStorage.getItem('vp3_view_pref') || 'grid';
             document.getElementById('input-fee').value = state.fee;
+            render(); // Renderiza dados do localStorage imediatamente
+
+            if (FIREBASE_CONFIG) {
+                try {
+                    const app = initializeApp(FIREBASE_CONFIG);
+                    const auth = getAuth(app);
+                    state.db = getFirestore(app);
+
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+
+                    onAuthStateChanged(auth, (user) => {
+                        state.user = user;
+                        if (user) {
+                            document.getElementById('status-indicator').classList.replace('bg-blue-500', 'bg-green-500');
+                            document.getElementById('status-text').innerText = "Nuvem Sincronizada";
+                            startCloudSync();
+                        }
+                    });
+                } catch (e) {
+                    console.error("Firebase indisponível, usando modo offline:", e);
+                }
+            }
         };
 
-        const startSync = () => {
-            const q = collection(db, 'artifacts', appId, 'public', 'data', 'members');
+        const startCloudSync = () => {
+            const q = collection(state.db, 'artifacts', APP_ID, 'public', 'data', 'members');
             onSnapshot(q, (snapshot) => {
-                state.members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                render();
-            }, (error) => {
-                console.error("Erro ao sincronizar:", error);
+                const cloudMembers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                if (cloudMembers.length > 0) {
+                    state.members = cloudMembers;
+                    saveLocal(); // Sincroniza nuvem para local
+                }
             });
         };
 
-        document.getElementById('input-fee').addEventListener('change', (e) => {
-            state.fee = Number(e.target.value);
-            localStorage.setItem('vp3_fee_pref', state.fee);
-            render();
-        });
-
-        // RENDERIZAÇÃO
+        // RENDERIZAÇÃO DA UI
         const render = () => {
             renderStats();
             renderList();
@@ -293,15 +302,11 @@
 
         const renderStats = () => {
             const totalMembers = state.members.length;
-            const totalPaidMonths = state.members.reduce((acc, m) => {
-                return acc + MONTHS.filter(mo => m.payments && m.payments[mo.id]).length;
-            }, 0);
-            
+            const totalPaidMonths = state.members.reduce((acc, m) => acc + MONTHS.filter(mo => m.payments[mo.id]).length, 0);
             const totalCollected = totalPaidMonths * state.fee;
             const potentialTotal = totalMembers * MONTHS.length * state.fee;
             const progress = potentialTotal > 0 ? (totalCollected / potentialTotal) * 100 : 0;
-            
-            const fullyPaid = state.members.filter(m => MONTHS.every(mo => m.payments && m.payments[mo.id])).length;
+            const fullyPaid = state.members.filter(m => MONTHS.every(mo => m.payments[mo.id])).length;
 
             document.getElementById('stat-total-collected').innerText = `R$ ${totalCollected.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
             document.getElementById('stat-progress-text').innerText = `${progress.toFixed(1)}%`;
@@ -314,7 +319,7 @@
         const renderList = () => {
             const container = document.getElementById('members-list');
             if (state.members.length === 0) {
-                container.innerHTML = `<div class="glass p-20 rounded-[3rem] text-center opacity-40 animate-slide-up"><p class="text-xl font-bold">Nenhum veterano cadastrado.</p></div>`;
+                container.innerHTML = `<div class="glass p-20 rounded-[3rem] text-center opacity-40"><p class="text-xl font-bold">Nenhum veterano cadastrado.</p><p class="text-sm">Os dados serão salvos no seu navegador.</p></div>`;
                 return;
             }
 
@@ -322,12 +327,12 @@
             const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
 
             container.innerHTML = sorted.map(member => {
-                const currentPaid = MONTHS.filter(mo => member.payments && member.payments[mo.id]).length;
+                const currentPaid = MONTHS.filter(mo => member.payments[mo.id]).length;
                 const isComplete = currentPaid === MONTHS.length;
                 const initial = member.name.charAt(0).toUpperCase();
 
                 const monthsHtml = MONTHS.map(m => {
-                    const isPaid = member.payments && member.payments[m.id];
+                    const isPaid = member.payments[m.id];
                     return `<button onclick="togglePayment('${member.id}', '${m.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl transition-all border group/btn ${isPaid ? 'bg-green-600 border-green-500 text-white' : 'bg-slate-800/40 border-white/5 text-slate-500 hover:border-white/20'}"><span class="text-[8px] font-black uppercase mb-0.5">${m.label}</span><div class="transition-transform group-active/btn:scale-75">${isPaid ? getIconHtml('check', 14) : '<div class="w-[14px] h-[14px]"></div>'}</div></button>`;
                 }).join('');
 
@@ -336,7 +341,7 @@
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-white ${isComplete ? 'bg-green-600' : 'bg-blue-600'}">${initial}</div>
-                                <div><h3 class="font-bold text-slate-900 truncate w-40">${member.name}</h3><p class="text-[10px] font-bold text-slate-500 uppercase">${currentPaid} pagos</p></div>
+                                <div><h3 class="font-bold text-slate-900 truncate w-40">${member.name}</h3><p class="text-[10px] font-bold text-slate-500 uppercase">${currentPaid} meses pagos</p></div>
                             </div>
                             <button onclick="deleteMember('${member.id}')" class="text-slate-300 hover:text-red-500 transition-colors p-1">${getIconHtml('trash', 18)}</button>
                         </div>
@@ -353,6 +358,7 @@
         const renderViewButtons = () => {
             const gridBtn = document.getElementById('view-grid');
             const listBtn = document.getElementById('view-list');
+            if (!gridBtn || !listBtn) return;
             [gridBtn, listBtn].forEach(b => b.classList.remove('bg-white', 'text-slate-900', 'text-slate-500'));
             if (state.view === 'grid') {
                 gridBtn.classList.add('bg-white', 'text-slate-900', 'shadow-md');
@@ -363,6 +369,7 @@
             }
         };
 
+        // ICONES E UTILS
         const iconPath = {
             cal: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
             money: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>',
@@ -388,6 +395,11 @@
             document.getElementById('icon-az').innerHTML = getIconHtml('az', 20);
             document.getElementById('icon-whatsapp').innerHTML = getIconHtml('whatsapp', 18);
         };
+
+        document.getElementById('input-fee').addEventListener('change', (e) => {
+            state.fee = Number(e.target.value);
+            saveLocal();
+        });
 
         init();
     </script>
