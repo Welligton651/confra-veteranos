@@ -4,395 +4,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Veteranos VP3 - 7 Anos</title>
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonte Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 300ms; }
-        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .check-anim { transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .check-btn:active .check-anim { transform: scale(0.8); }
-        
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-
-        /* Estilo da Máscara de Fundo */
-        .bg-custom-image {
-            background-image: url('https://i.ibb.co/sJ2s5Q67/1-Whats-App-Image-2025-04-10-at-08-46-38-2.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .bg-overlay {
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95));
-            backdrop-filter: blur(4px);
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-light { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
     </style>
 </head>
-<body class="bg-slate-900 min-h-screen text-slate-100 pb-40 relative overflow-x-hidden bg-custom-image">
+<body class="bg-[#0f172a] text-slate-200 min-h-screen pb-32 overflow-x-hidden">
 
-    <!-- Máscara de Harmonização -->
-    <div class="fixed inset-0 z-0 bg-overlay"></div>
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none opacity-20 z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-yellow-600 rounded-full blur-[120px]"></div>
+    </div>
 
-    <div class="relative z-10">
+    <div class="relative z-10 max-w-5xl mx-auto px-4 pt-8">
         
-        <!-- HEADER -->
-        <header class="bg-slate-900/40 backdrop-blur-sm text-white pt-6 pb-20 px-4 rounded-b-[3rem] shadow-2xl relative border-b border-white/10">
-            <div class="max-w-4xl mx-auto relative z-10">
-                
-                <div class="absolute top-0 right-0 p-4">
-                    <div class="flex items-center gap-2 text-[10px] uppercase font-bold text-blue-400 bg-black/40 px-3 py-1 rounded-full border border-blue-500/30">
-                        <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                        Armazenamento Local
-                    </div>
+        <!-- Header Section -->
+        <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 animate-slide-up">
+            <div>
+                <div class="flex items-center gap-2 text-yellow-500 font-bold tracking-widest text-[10px] uppercase mb-2">
+                    <span id="header-icon-cal"></span>
+                    <span>Comemoração 7 Anos - VP3</span>
                 </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+                    Veteranos <span class="text-blue-500">VP3</span>
+                </h1>
+                <p class="text-slate-400 mt-2">Controle Central de Mensalidades (Fev a Dez)</p>
+            </div>
 
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 mt-4">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1 text-yellow-500">
-                            <span id="icon-calendar-head"></span>
-                            <span class="text-xs font-bold tracking-widest uppercase">Comemoração 7 Anos</span>
-                        </div>
-                        <h1 class="text-3xl font-extrabold leading-none">
-                            Veteranos <span class="text-blue-500">VP3</span><br/>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-500">Controle de Mensalidade</span>
-                        </h1>
-                    </div>
-                    
-                    <div class="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10">
-                        <div class="text-right">
-                            <p class="text-[10px] text-gray-400 uppercase font-bold">Valor Mensal</p>
-                            <p class="text-xl font-bold font-mono text-yellow-500">R$ <span id="display-fee">20</span></p>
-                        </div>
-                        <div class="h-8 w-px bg-white/10 mx-1"></div>
-                        <input type="number" id="input-fee" value="20" class="bg-transparent w-16 text-right border-b border-white/20 focus:border-yellow-400 outline-none text-sm text-gray-300 py-1" placeholder="20">
-                    </div>
-                </div>
-
-                <!-- DASHBOARD -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    
-                    <div class="bg-slate-800/60 backdrop-blur-md p-5 rounded-2xl border border-white/10 flex items-center justify-between">
-                        <div class="flex flex-col justify-center">
-                            <p class="text-xs text-gray-400 font-bold uppercase mb-2">
-                                <span id="icon-pie-title"></span> Status Pagamentos
-                            </p>
-                            
-                            <div class="flex flex-col gap-2">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                                    <div class="flex flex-col leading-none">
-                                        <span class="text-lg font-bold text-white" id="stat-paid">0</span>
-                                        <span class="text-[10px] text-gray-400 uppercase">Em dia</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                    <div class="flex flex-col leading-none">
-                                        <span class="text-lg font-bold text-gray-300" id="stat-pending">0</span>
-                                        <span class="text-[10px] text-gray-500 uppercase">Pendentes</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative w-20 h-20 flex-shrink-0">
-                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <circle cx="18" cy="18" r="16" fill="none" stroke="#334155" stroke-width="4" />
-                                <circle id="pie-chart-circle" cx="18" cy="18" r="16" fill="none" stroke="#eab308" stroke-width="4" stroke-dasharray="0 100" stroke-linecap="round" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="md:col-span-2 bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-md p-5 rounded-2xl border border-white/10 flex flex-col justify-between">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-xs text-gray-400 font-bold uppercase mb-1">Total Arrecadado</p>
-                                <p class="text-4xl font-bold text-yellow-500 tracking-tight" id="stat-money-collected">R$ 0</p>
-                                <p class="text-xs text-gray-500 mt-1">Potencial até Agosto: <span id="stat-money-potential">R$ 0</span></p>
-                            </div>
-                            <div class="bg-yellow-500/10 p-2 rounded-lg text-yellow-500" id="icon-trophy-stat"></div>
-                        </div>
-
-                        <div class="relative pt-2">
-                            <div class="flex justify-between text-xs font-bold text-gray-400 mb-1">
-                                <span>Progresso Financeiro</span>
-                                <span id="stat-percent">0%</span>
-                            </div>
-                            <div class="h-3 w-full bg-slate-700/50 rounded-full overflow-hidden">
-                                <div id="main-progress-bar" class="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-1000 ease-out" style="width: 0%"></div>
-                            </div>
-                        </div>
+            <div class="glass p-4 rounded-2xl flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-[10px] uppercase font-bold text-slate-500">Valor Mensal</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-500 font-bold">R$</span>
+                        <input type="number" id="input-fee" value="20" class="bg-transparent border-b border-white/20 w-16 text-xl font-bold outline-none focus:border-yellow-500 transition-colors">
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- LISTA -->
-        <main class="max-w-4xl mx-auto px-4 -mt-12 relative z-20">
-            
-            <div class="flex flex-col md:flex-row gap-4 mb-6">
-                <div class="flex-1 bg-white/90 backdrop-blur-md p-1.5 rounded-xl shadow-lg border border-white/20 flex gap-2">
-                    <div class="relative flex-1">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400" id="icon-plus-input"></div>
-                        <input type="text" id="input-new-name" placeholder="Nome do integrante..." class="w-full pl-9 pr-4 py-2.5 bg-gray-50 rounded-lg border-none outline-none text-gray-800 text-sm font-medium">
+        <!-- Stats Dashboard -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 animate-slide-up" style="animation-delay: 0.1s">
+            <div class="md:col-span-2 glass p-6 rounded-3xl relative overflow-hidden group">
+                <div class="relative z-10">
+                    <p class="text-xs font-bold uppercase text-slate-500 mb-1">Arrecadação Total</p>
+                    <h2 class="text-4xl font-black text-white" id="stat-total-collected">R$ 0,00</h2>
+                    <div class="mt-4 flex items-center justify-between text-[11px] font-bold">
+                        <span class="text-slate-400">Progresso Anual</span>
+                        <span id="stat-progress-text" class="text-yellow-500">0%</span>
                     </div>
-                    <button onclick="addMember()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 rounded-lg font-bold text-sm transition-transform active:scale-95 shadow-lg">Adicionar</button>
+                    <div class="h-2 w-full bg-white/5 rounded-full mt-2 overflow-hidden">
+                        <div id="stat-progress-bar" class="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-700" style="width: 0%"></div>
+                    </div>
                 </div>
-
-                <div class="bg-white/90 backdrop-blur-md p-1.5 rounded-xl shadow-lg border border-white/20 flex gap-1">
-                    <button onclick="setViewMode('grid')" id="btn-view-grid" class="p-2.5 rounded-lg transition-all"></button>
-                    <button onclick="setViewMode('list')" id="btn-view-list" class="p-2.5 rounded-lg transition-all"></button>
-                </div>
+                <div class="absolute right-[-20px] bottom-[-20px] opacity-10 group-hover:scale-110 transition-transform duration-500" id="stat-icon-money"></div>
             </div>
 
-            <div id="members-list-container" class="pb-10 min-h-[300px]">
-                <!-- Rendered by JS -->
+            <div class="glass p-6 rounded-3xl flex flex-col justify-center">
+                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Membros Quitados</p>
+                <div class="text-3xl font-bold text-center text-green-500" id="stat-paid-members">0</div>
+                <p class="text-[10px] text-slate-500 text-center uppercase" id="stat-total-members">de 0 total</p>
             </div>
 
-        </main>
+            <div class="glass p-6 rounded-3xl flex flex-col justify-center">
+                <p class="text-xs font-bold uppercase text-slate-500 mb-2 text-center">Pendentes (Ano)</p>
+                <div class="text-3xl font-bold text-center text-red-400" id="stat-pending-members">0</div>
+                <p class="text-[10px] text-slate-500 text-center uppercase">Com parcelas em aberto</p>
+            </div>
+        </section>
 
-        <!-- RODAPÉ FIXO -->
-        <div class="fixed bottom-0 left-0 right-0 p-3 bg-slate-900/90 backdrop-blur-xl border-t border-white/10 z-50">
-            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
-                <div class="text-center sm:text-left">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase block">Integrantes</span>
-                    <span class="text-xs text-white font-bold" id="stat-total-members">0 cadastrados</span>
+        <!-- Search & Add -->
+        <div class="flex flex-col md:flex-row gap-3 mb-6 animate-slide-up" style="animation-delay: 0.2s">
+            <div class="flex-1 glass-light p-1.5 rounded-2xl flex gap-2">
+                <div class="flex-1 relative">
+                    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-slate-400" id="icon-search-input"></div>
+                    <input type="text" id="input-new-member" placeholder="Nome do Novo Veterano..." class="w-full bg-transparent pl-10 pr-4 py-3 outline-none text-slate-900 font-semibold text-sm">
                 </div>
-                
-                <div class="flex items-center gap-2 w-full sm:w-auto">
-                    <button onclick="shareAlphabetical()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-lg flex-1 sm:flex-none border border-white/5">
-                        <span id="icon-az-btn"></span>
-                        <span>Lista (A-Z)</span>
-                    </button>
-                    <button onclick="shareWhatsApp()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center justify-center gap-2 shadow-lg flex-1 sm:flex-none">
-                        <span id="icon-whatsapp-btn"></span>
-                        <span>Relatório Financeiro</span>
-                    </button>
-                </div>
+                <button onclick="addMember()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg">ADICIONAR</button>
+            </div>
+            
+            <div class="glass p-1.5 rounded-2xl flex gap-1">
+                <button onclick="changeView('grid')" id="view-grid" class="p-3 rounded-xl transition-all"></button>
+                <button onclick="changeView('list')" id="view-list" class="p-3 rounded-xl transition-all"></button>
+            </div>
+        </div>
+
+        <!-- Members Container -->
+        <div id="members-list" class="min-h-[400px]">
+            <div class="flex flex-col items-center justify-center py-20 opacity-40">
+                <div id="loading-spinner" class="animate-spin rounded-full h-10 w-10 border-b-2 border-white mb-4"></div>
+                <p id="loading-text">Sincronizando veteranos...</p>
             </div>
         </div>
     </div>
 
-    <script>
-        const STORAGE_KEY = "vp3_veteranos_7anos_data";
+    <!-- Persistent Footer -->
+    <nav class="fixed bottom-0 left-0 right-0 p-4 z-50">
+        <div class="max-w-xl mx-auto glass-light rounded-[2rem] p-4 shadow-2xl flex items-center justify-between gap-4 border border-white/20">
+            <div class="pl-4">
+                <p class="text-[10px] font-bold text-slate-500 uppercase">Status</p>
+                <div class="flex items-center gap-2">
+                    <div id="status-indicator" class="w-2 h-2 rounded-full bg-slate-400"></div>
+                    <span id="status-text" class="text-xs font-bold text-slate-900">Desconectado</span>
+                </div>
+            </div>
+            
+            <div class="flex gap-2">
+                <button onclick="exportAZ()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 p-3 rounded-2xl transition-all" title="Lista A-Z">
+                    <div id="icon-az"></div>
+                </button>
+                <button onclick="shareReport()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 shadow-xl shadow-green-500/20 active:scale-95 transition-all">
+                    <div id="icon-whatsapp"></div>
+                    <span>ENVIAR RELATÓRIO</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, onSnapshot, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // CONFIGURAÇÕES GLOBAIS COM FALLBACK PARA EVITAR ERROS
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vp3-veteranos-v2';
+        
+        // Período de Fevereiro a Dezembro
         const MONTHS = [
-            {k:'fev', l:'Fev'}, {k:'mar', l:'Mar'}, {k:'abr', l:'Abr'}, 
-            {k:'mai', l:'Mai'}, {k:'jun', l:'Jun'}, {k:'jul', l:'Jul'}, {k:'ago', l:'Ago'}
+            { id: 'fev', label: 'Fev' }, { id: 'mar', label: 'Mar' }, { id: 'abr', label: 'Abr' },
+            { id: 'mai', label: 'Mai' }, { id: 'jun', label: 'Jun' }, { id: 'jul', label: 'Jul' },
+            { id: 'ago', label: 'Ago' }, { id: 'set', label: 'Set' }, { id: 'out', label: 'Out' },
+            { id: 'nov', label: 'Nov' }, { id: 'dez', label: 'Dez' }
         ];
 
-        let members = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        let monthlyFee = Number(localStorage.getItem("vp3_fee")) || 20;
-        let viewMode = localStorage.getItem("vp3_view") || 'grid';
+        let state = {
+            members: [],
+            fee: 20,
+            view: 'grid',
+            user: null
+        };
 
-        function saveData() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
-            localStorage.setItem("vp3_fee", monthlyFee);
-            localStorage.setItem("vp3_view", viewMode);
-            updateUI();
-        }
+        let db, auth;
 
-        function addMember() {
-            const input = document.getElementById('input-new-name');
+        // VINCULAR FUNÇÕES AO WINDOW IMEDIATAMENTE (Evita "addMember is not defined")
+        window.addMember = async () => {
+            if (!state.user || !db) return;
+            const input = document.getElementById('input-new-member');
             const name = input.value.trim();
             if (!name) return;
 
+            const id = Date.now().toString();
+            const initialPayments = {};
+            MONTHS.forEach(m => initialPayments[m.id] = false);
+
             const newMember = {
-                id: Date.now().toString(),
                 name: name,
-                payments: { fev:false, mar:false, abr:false, mai:false, jun:false, jul:false, ago:false }
+                payments: initialPayments,
+                createdAt: new Date().toISOString()
             };
 
-            members.push(newMember);
-            input.value = '';
-            saveData();
-        }
+            try {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', id), newMember);
+                input.value = '';
+            } catch (e) { console.error("Erro ao salvar:", e); }
+        };
 
-        function togglePayment(id, month) {
-            const member = members.find(m => m.id === id);
-            if (member) {
-                member.payments[month] = !member.payments[month];
-                saveData();
-            }
-        }
+        window.togglePayment = async (memberId, monthId) => {
+            if (!state.user || !db) return;
+            const member = state.members.find(m => m.id === memberId);
+            if (!member) return;
 
-        function deleteMember(id) {
-            if (confirm("Remover este integrante?")) {
-                members = members.filter(m => m.id !== id);
-                saveData();
-            }
-        }
-
-        function setViewMode(mode) {
-            viewMode = mode;
-            saveData();
-        }
-
-        function updateUI() {
-            renderStats();
-            renderList();
-            updateViewButtons();
-        }
-
-        function renderStats() {
-            const totalMembers = members.length;
-            const collected = members.reduce((acc, m) => acc + (Object.values(m.payments).filter(Boolean).length * monthlyFee), 0);
-            const potential = totalMembers * MONTHS.length * monthlyFee;
-            const fullyPaid = members.filter(m => Object.values(m.payments).every(Boolean)).length;
-            const percent = potential > 0 ? (collected / potential) * 100 : 0;
-
-            document.getElementById('display-fee').innerText = monthlyFee;
-            document.getElementById('stat-paid').innerText = fullyPaid;
-            document.getElementById('stat-pending').innerText = totalMembers - fullyPaid;
-            document.getElementById('stat-money-collected').innerText = `R$ ${collected.toLocaleString('pt-BR')}`;
-            document.getElementById('stat-money-potential').innerText = `R$ ${potential.toLocaleString('pt-BR')}`;
-            document.getElementById('stat-percent').innerText = `${percent.toFixed(1)}%`;
-            document.getElementById('stat-total-members').innerText = `${totalMembers} integrantes`;
-            document.getElementById('main-progress-bar').style.width = `${percent}%`;
-
-            const circle = document.getElementById('pie-chart-circle');
-            const radius = 16;
-            const circumference = 2 * Math.PI * radius;
-            const ratio = totalMembers > 0 ? fullyPaid / totalMembers : 0;
-            circle.style.strokeDasharray = `${ratio * circumference} ${circumference}`;
-        }
-
-        function renderList() {
-            const container = document.getElementById('members-list-container');
-            container.innerHTML = '';
+            const current = !!member.payments[monthId];
+            const updates = { [`payments.${monthId}`]: !current };
             
-            if (members.length === 0) {
-                container.innerHTML = `<div class="bg-slate-800/60 backdrop-blur-md rounded-3xl p-10 text-center border border-white/10 text-gray-300">Ainda não há integrantes cadastrados.</div>`;
+            try {
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', memberId), updates);
+            } catch (e) { console.error("Erro ao atualizar:", e); }
+        };
+
+        window.deleteMember = async (id) => {
+            if (!state.user || !db) return;
+            if (confirm("Deseja realmente remover este veterano?")) {
+                try {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'members', id));
+                } catch (e) { console.error("Erro ao deletar:", e); }
+            }
+        };
+
+        window.changeView = (mode) => {
+            state.view = mode;
+            localStorage.setItem('vp3_view_pref', mode);
+            render();
+        };
+
+        window.exportAZ = () => {
+            if (state.members.length === 0) return;
+            const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
+            let text = `📋 *LISTA DE VETERANOS VP3 - ORDEM A-Z*\n\n`;
+            sorted.forEach((m, i) => text += `${i+1}. ${m.name}\n`);
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        window.shareReport = () => {
+            if (state.members.length === 0) return;
+            const total = state.members.reduce((acc, m) => acc + (MONTHS.filter(mo => m.payments[mo.id]).length * state.fee), 0);
+            let text = `🏆 *RELATÓRIO DE MENSALIDADES - VP3* 🏆\n\n`;
+            const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
+            sorted.forEach(m => {
+                const missing = MONTHS.filter(mo => !m.payments[mo.id]);
+                const status = missing.length === 0 ? "✅ QUITADO" : `⏳ Faltam: ${missing.map(mo => mo.label).join(', ')}`;
+                text += `👤 *${m.name}*\n${status}\n\n`;
+            });
+            text += `💰 *TOTAL ARRECADADO: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}*`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        // INICIALIZAÇÃO
+        const init = async () => {
+            setupIcons();
+            
+            if (!firebaseConfig) {
+                document.getElementById('loading-text').innerText = "Erro: Configuração de nuvem não encontrada.";
+                document.getElementById('loading-spinner').classList.add('hidden');
                 return;
             }
 
-            container.className = viewMode === 'grid' 
-                ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-10 fade-in' 
-                : 'flex flex-col gap-2 pb-10 fade-in';
+            try {
+                const appInstance = initializeApp(firebaseConfig);
+                auth = getAuth(appInstance);
+                db = getFirestore(appInstance);
 
-            members.forEach(member => {
-                const paidCount = Object.values(member.payments).filter(Boolean).length;
-                const isCompleted = paidCount === MONTHS.length;
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    state.user = user;
+                    if (user) {
+                        document.getElementById('status-indicator').classList.replace('bg-slate-400', 'bg-green-500');
+                        document.getElementById('status-text').innerText = "Sincronizado";
+                        startSync();
+                    }
+                });
+            } catch (error) {
+                console.error("Erro Firebase:", error);
+                document.getElementById('loading-text').innerText = "Erro ao conectar com o servidor.";
+            }
+
+            state.fee = Number(localStorage.getItem('vp3_fee_pref')) || 20;
+            state.view = localStorage.getItem('vp3_view_pref') || 'grid';
+            document.getElementById('input-fee').value = state.fee;
+        };
+
+        const startSync = () => {
+            const q = collection(db, 'artifacts', appId, 'public', 'data', 'members');
+            onSnapshot(q, (snapshot) => {
+                state.members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                render();
+            }, (error) => {
+                console.error("Erro ao sincronizar:", error);
+            });
+        };
+
+        document.getElementById('input-fee').addEventListener('change', (e) => {
+            state.fee = Number(e.target.value);
+            localStorage.setItem('vp3_fee_pref', state.fee);
+            render();
+        });
+
+        // RENDERIZAÇÃO
+        const render = () => {
+            renderStats();
+            renderList();
+            renderViewButtons();
+        };
+
+        const renderStats = () => {
+            const totalMembers = state.members.length;
+            const totalPaidMonths = state.members.reduce((acc, m) => {
+                return acc + MONTHS.filter(mo => m.payments && m.payments[mo.id]).length;
+            }, 0);
+            
+            const totalCollected = totalPaidMonths * state.fee;
+            const potentialTotal = totalMembers * MONTHS.length * state.fee;
+            const progress = potentialTotal > 0 ? (totalCollected / potentialTotal) * 100 : 0;
+            
+            const fullyPaid = state.members.filter(m => MONTHS.every(mo => m.payments && m.payments[mo.id])).length;
+
+            document.getElementById('stat-total-collected').innerText = `R$ ${totalCollected.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            document.getElementById('stat-progress-text').innerText = `${progress.toFixed(1)}%`;
+            document.getElementById('stat-progress-bar').style.width = `${progress}%`;
+            document.getElementById('stat-paid-members').innerText = fullyPaid;
+            document.getElementById('stat-total-members').innerText = `de ${totalMembers} total`;
+            document.getElementById('stat-pending-members').innerText = totalMembers - fullyPaid;
+        };
+
+        const renderList = () => {
+            const container = document.getElementById('members-list');
+            if (state.members.length === 0) {
+                container.innerHTML = `<div class="glass p-20 rounded-[3rem] text-center opacity-40 animate-slide-up"><p class="text-xl font-bold">Nenhum veterano cadastrado.</p></div>`;
+                return;
+            }
+
+            container.className = state.view === 'grid' ? "grid grid-cols-1 md:grid-cols-2 gap-4 pb-20" : "flex flex-col gap-3 pb-20";
+            const sorted = [...state.members].sort((a,b) => a.name.localeCompare(b.name));
+
+            container.innerHTML = sorted.map(member => {
+                const currentPaid = MONTHS.filter(mo => member.payments && member.payments[mo.id]).length;
+                const isComplete = currentPaid === MONTHS.length;
                 const initial = member.name.charAt(0).toUpperCase();
 
-                let html = '';
-                const renderMonths = () => MONTHS.map(m => {
-                    const active = member.payments[m.k];
-                    return `
-                    <button onclick="togglePayment('${member.id}', '${m.k}')" 
-                        class="flex flex-col items-center justify-center p-1.5 rounded-lg transition-all border ${active ? 'bg-green-600 text-white border-green-600' : 'bg-white/5 text-gray-400 border-white/10'} check-btn">
-                        <span class="text-[9px] font-bold uppercase mb-0.5">${m.l.charAt(0)}</span>
-                        <div class="check-anim">${active ? getIcon('check', 14) : '<div class="w-3.5 h-3.5"></div>'}</div>
-                    </button>`;
+                const monthsHtml = MONTHS.map(m => {
+                    const isPaid = member.payments && member.payments[m.id];
+                    return `<button onclick="togglePayment('${member.id}', '${m.id}')" class="flex flex-col items-center justify-center p-2 rounded-xl transition-all border group/btn ${isPaid ? 'bg-green-600 border-green-500 text-white' : 'bg-slate-800/40 border-white/5 text-slate-500 hover:border-white/20'}"><span class="text-[8px] font-black uppercase mb-0.5">${m.label}</span><div class="transition-transform group-active/btn:scale-75">${isPaid ? getIconHtml('check', 14) : '<div class="w-[14px] h-[14px]"></div>'}</div></button>`;
                 }).join('');
 
-                if (viewMode === 'grid') {
-                    html = `
-                    <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-sm border ${isCompleted ? 'border-green-400 ring-2 ring-green-500/20' : 'border-gray-200'}">
+                return state.view === 'grid' ? `
+                    <div class="glass-light rounded-3xl p-5 shadow-xl animate-slide-up ${isComplete ? 'ring-2 ring-green-500' : ''}">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${isCompleted ? 'bg-green-600' : 'bg-slate-700'}">${initial}</div>
-                                <div>
-                                    <h3 class="font-bold text-gray-800 truncate w-32">${member.name}</h3>
-                                    <span class="text-[10px] font-bold text-gray-500 uppercase">${paidCount}/${MONTHS.length} meses</span>
-                                </div>
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-white ${isComplete ? 'bg-green-600' : 'bg-blue-600'}">${initial}</div>
+                                <div><h3 class="font-bold text-slate-900 truncate w-40">${member.name}</h3><p class="text-[10px] font-bold text-slate-500 uppercase">${currentPaid} pagos</p></div>
                             </div>
-                            <button onclick="deleteMember('${member.id}')" class="text-gray-400 hover:text-red-500 transition-colors">${getIcon('trash', 16)}</button>
+                            <button onclick="deleteMember('${member.id}')" class="text-slate-300 hover:text-red-500 transition-colors p-1">${getIconHtml('trash', 18)}</button>
                         </div>
-                        <div class="grid grid-cols-7 gap-1">${renderMonths()}</div>
+                        <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-11 gap-1.5">${monthsHtml}</div>
+                    </div>` : `
+                    <div class="glass-light rounded-2xl p-3 flex flex-col lg:flex-row items-center gap-4 animate-slide-up ${isComplete ? 'ring-2 ring-green-500' : ''}">
+                        <div class="flex items-center gap-3 w-full lg:w-1/4 pl-2"><div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white ${isComplete ? 'bg-green-600' : 'bg-blue-600'}">${initial}</div><h3 class="font-bold text-slate-900 truncate">${member.name}</h3></div>
+                        <div class="grid grid-cols-6 sm:grid-cols-11 gap-1.5 flex-1 w-full lg:w-auto">${monthsHtml}</div>
+                        <button onclick="deleteMember('${member.id}')" class="text-slate-300 hover:text-red-500 transition-colors p-2 lg:ml-auto">${getIconHtml('trash', 18)}</button>
                     </div>`;
-                } else {
-                    html = `
-                    <div class="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex flex-col sm:flex-row items-center gap-3 border ${isCompleted ? 'border-green-400 bg-green-50/50' : 'border-gray-200'}">
-                        <div class="flex items-center gap-3 w-full sm:w-1/3">
-                            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold ${isCompleted ? 'bg-green-600' : 'bg-slate-700'}">${initial}</div>
-                            <h3 class="font-bold text-gray-800 text-sm truncate">${member.name}</h3>
-                        </div>
-                        <div class="grid grid-cols-7 gap-1 w-full sm:w-auto">${renderMonths()}</div>
-                        <button onclick="deleteMember('${member.id}')" class="text-gray-400 hover:text-red-500 sm:ml-auto transition-colors">${getIcon('trash', 16)}</button>
-                    </div>`;
-                }
-                container.insertAdjacentHTML('beforeend', html);
-            });
-        }
-
-        function updateViewButtons() {
-            ['grid', 'list'].forEach(m => {
-                const btn = document.getElementById(`btn-view-${m}`);
-                if (btn) {
-                    btn.className = viewMode === m 
-                        ? "p-2.5 rounded-lg bg-blue-600 text-white" 
-                        : "p-2.5 rounded-lg text-gray-500 hover:bg-gray-100";
-                    btn.innerHTML = getIcon(m, 20);
-                }
-            });
-        }
-
-        // Compartilhamento
-        function shareAlphabetical() {
-            if (members.length === 0) return;
-            const sorted = [...members].sort((a,b) => a.name.localeCompare(b.name));
-            let text = `⚽ *VETERANOS VP3 - LISTA A-Z*\n\n`;
-            sorted.forEach((m, i) => text += `${i+1}. ${m.name}\n`);
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function shareWhatsApp() {
-            if (members.length === 0) return;
-            let text = `🏆 *RELATÓRIO VETERANOS VP3 (7 ANOS)* 🏆\n\n`;
-            
-            members.forEach(m => {
-                const paidCount = Object.values(m.payments).filter(Boolean).length;
-                const status = paidCount === MONTHS.length ? "✅ QUITADO" : `⏳ FALTA: ${MONTHS.filter(mo => !m.payments[mo.k]).map(mo => mo.l).join(', ')}`;
-                text += `👤 *${m.name}*\n${status}\n\n`;
-            });
-
-            const total = members.reduce((acc, m) => acc + (Object.values(m.payments).filter(Boolean).length * monthlyFee), 0);
-            text += `💰 *TOTAL EM CAIXA: R$ ${total.toLocaleString('pt-BR')}*`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        // Ícones
-        const icons = {
-            plus: `<path d="M5 12h14" /><path d="M12 5v14" />`,
-            trash: `<path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />`,
-            check: `<polyline points="20 6 9 17 4 12" />`,
-            calendar: `<rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" />`,
-            trophy: `<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /><path d="M4 22h16" />`,
-            whatsapp: `<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />`,
-            grid: `<rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />`,
-            list: `<line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />`,
-            pie: `<path d="M21.21 15.89A10 10 0 1 1 8 2.83" /><path d="M22 12A10 10 0 0 0 12 2v10z" />`,
-            sortaz: `<path d="M15 10h5" /><path d="M15 14h5" /><path d="M4 6 9 6" /><path d="M9 6 4 18" /><path d="M4 18 9 18" />`
+            }).join('');
         };
-        function getIcon(name, size=24, cls=""){return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${cls}">${icons[name]||''}</svg>`;}
 
-        // Init
-        document.getElementById('icon-calendar-head').innerHTML = getIcon('calendar', 16);
-        document.getElementById('icon-pie-title').innerHTML = getIcon('pie', 14);
-        document.getElementById('icon-trophy-stat').innerHTML = getIcon('trophy', 32);
-        document.getElementById('icon-plus-input').innerHTML = getIcon('plus', 18);
-        document.getElementById('icon-az-btn').innerHTML = getIcon('sortaz', 18);
-        document.getElementById('icon-whatsapp-btn').innerHTML = getIcon('whatsapp', 18);
-        
-        document.getElementById('input-fee').addEventListener('change', (e) => {
-            monthlyFee = Number(e.target.value);
-            saveData();
-        });
+        const renderViewButtons = () => {
+            const gridBtn = document.getElementById('view-grid');
+            const listBtn = document.getElementById('view-list');
+            [gridBtn, listBtn].forEach(b => b.classList.remove('bg-white', 'text-slate-900', 'text-slate-500'));
+            if (state.view === 'grid') {
+                gridBtn.classList.add('bg-white', 'text-slate-900', 'shadow-md');
+                listBtn.classList.add('text-slate-500');
+            } else {
+                listBtn.classList.add('bg-white', 'text-slate-900', 'shadow-md');
+                gridBtn.classList.add('text-slate-500');
+            }
+        };
 
-        document.getElementById('input-new-name').addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') addMember();
-        });
+        const iconPath = {
+            cal: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>',
+            money: '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>',
+            search: '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>',
+            grid: '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>',
+            list: '<line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line>',
+            check: '<polyline points="20 6 9 17 4 12"></polyline>',
+            trash: '<polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>',
+            az: '<path d="M11 5h10"></path><path d="M11 9h10"></path><path d="M11 13h10"></path><path d="M11 17h10"></path><path d="M3 7l3 3 3-3"></path><path d="M6 10V4"></path>',
+            whatsapp: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>'
+        };
 
-        updateUI();
+        function getIconHtml(name, size = 24) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPath[name]}</svg>`;
+        }
+
+        const setupIcons = () => {
+            document.getElementById('header-icon-cal').innerHTML = getIconHtml('cal', 14);
+            document.getElementById('stat-icon-money').innerHTML = getIconHtml('money', 120);
+            document.getElementById('icon-search-input').innerHTML = getIconHtml('search', 18);
+            document.getElementById('view-grid').innerHTML = getIconHtml('grid', 20);
+            document.getElementById('view-list').innerHTML = getIconHtml('list', 20);
+            document.getElementById('icon-az').innerHTML = getIconHtml('az', 20);
+            document.getElementById('icon-whatsapp').innerHTML = getIconHtml('whatsapp', 18);
+        };
+
+        init();
     </script>
 </body>
 </html>
